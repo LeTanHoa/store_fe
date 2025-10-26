@@ -18,7 +18,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
     });
 
     const result = await axios.get(
-      `http://localhost:8080/api/shop/products/get?${query}`
+      `http://storebe-api.vercel.app/api/shop/products/get?${query}`
     );
 
     console.log(result);
@@ -31,7 +31,7 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `http://localhost:8080/api/shop/products/get/${id}`
+      `http://storebe-api.vercel.app/api/shop/products/get/${id}`
     );
 
     return result?.data;

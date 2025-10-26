@@ -84,7 +84,7 @@ function ShoppingCheckout() {
           getOrderDetailsForAdmin(res?.orderId)
         ).unwrap();
         await axios.post(
-          "http://localhost:8080/api/email/send-mail-order-success",
+          "http://storebe-api.vercel.app/api/email/send-mail-order-success",
           {
             email: user?.email,
             data: orderRes,

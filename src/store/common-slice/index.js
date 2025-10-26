@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/common/feature";
+const BASE_URL = "http://storebe-api.vercel.app/api/common/feature";
 
 const initialState = {
   isLoading: false,
