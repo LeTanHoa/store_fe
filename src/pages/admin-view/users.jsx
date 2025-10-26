@@ -14,7 +14,7 @@ const AdminUsers = () => {
 
   const handleDeleteUser = (userId) => {
     const res = axios.delete(
-      `http://storebe-api.vercel.app/api/admin/users/delete/${userId}`
+      `https://storebe-api.vercel.app/api/admin/users/delete/${userId}`
     );
     res
       .then(() => {

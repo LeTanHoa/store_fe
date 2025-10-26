@@ -12,7 +12,7 @@ export const getSearchResults = createAsyncThunk(
   async (keyword, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://storebe-api.vercel.app/api/shop/search/${keyword}`
+        `https://storebe-api.vercel.app/api/shop/search/${keyword}`
       );
       // response.data = { success: true, data: [...] }
       return response.data.data; // ✅ Trả về mảng sản phẩm

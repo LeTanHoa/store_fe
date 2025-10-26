@@ -11,7 +11,7 @@ export const addReview = createAsyncThunk(
   "/order/addReview",
   async (formdata) => {
     const response = await axios.post(
-      `http://storebe-api.vercel.app/api/shop/review/add`,
+      `https://storebe-api.vercel.app/api/shop/review/add`,
       formdata
     );
 
@@ -21,7 +21,7 @@ export const addReview = createAsyncThunk(
 
 export const getReviews = createAsyncThunk("/order/getReviews", async (id) => {
   const response = await axios.get(
-    `http://storebe-api.vercel.app/api/shop/review/${id}`
+    `https://storebe-api.vercel.app/api/shop/review/${id}`
   );
 
   return response.data;
@@ -30,7 +30,7 @@ export const getAllReviews = createAsyncThunk(
   "/order/getAllReviews",
   async () => {
     const response = await axios.get(
-      `http://storebe-api.vercel.app/api/shop/review/all`
+      `https://storebe-api.vercel.app/api/shop/review/all`
     );
 
     return response.data;

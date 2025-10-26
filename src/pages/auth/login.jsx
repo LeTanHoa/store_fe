@@ -23,7 +23,7 @@ function AuthLogin() {
         toast.success("Đăng nhập thành công!");
 
         try {
-          await axios.post("http://storebe-api.vercel.app/api/email/send-mail-login", {
+          await axios.post("https://storebe-api.vercel.app/api/email/send-mail-login", {
             email: data?.payload?.user?.email,
             name: data?.payload?.user?.userName,
           });

@@ -53,7 +53,7 @@ function AdminBanners() {
 
   const handleDeleteFeatureImage = async (id) => {
     if (!window.confirm("Bạn có chắc chắn muốn xoá ảnh này không?")) return;
-    await axios.delete(`http://storebe-api.vercel.app/api/common/feature/delete/${id}`);
+    await axios.delete(`https://storebe-api.vercel.app/api/common/feature/delete/${id}`);
     dispatch(getFeatureImages());
     message.success("Đã xóa banner!");
   };
