@@ -5,7 +5,6 @@ import {
   ClipboardList,
   ChartNoAxesCombined,
   Users,
-  BarChart3,
 } from "lucide-react";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";

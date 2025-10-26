@@ -10,4 +10,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: "dist", // Thư mục output chuẩn cho Vercel
+  },
+  base: "/", // Quan trọng cho routing SPA khi reload
 });
