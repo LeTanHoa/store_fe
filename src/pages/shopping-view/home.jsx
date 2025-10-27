@@ -86,52 +86,6 @@ const ShoppingHome = () => {
     { id: "smartwatch", label: "Đồng hồ thông minh" },
     { id: "accessories", label: "Phụ kiện" },
   ];
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
-  const settingsBanner = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
-  const { productList } = useSelector((state) => state.shopProducts);
-  const { featureImageList } = useSelector((state) => state.commonFeature);
-  const { user } = useSelector((state) => state.auth);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -146,6 +100,45 @@ const ShoppingHome = () => {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: isMobile ? 1 : 4,
+    slidesToScroll: isMobile ? 1 : 4,
+    // responsive: [
+    //   {
+    //     breakpoint: 1024, // Tablet & small laptop
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 2,
+    //       infinite: true,
+    //       dots: true,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 768, // Mobile
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //       infinite: true,
+    //       dots: true,
+    //     },
+    //   },
+    // ],
+  };
+
+  const settingsBanner = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  const { productList } = useSelector((state) => state.shopProducts);
+  const { featureImageList } = useSelector((state) => state.commonFeature);
+  const { user } = useSelector((state) => state.auth);
 
   const filteredImages = featureImageList?.filter(
     (item) => item?.type === (isMobile ? "mobile" : "desktop")
@@ -278,7 +271,7 @@ const ShoppingHome = () => {
               {products.length === 0 ? (
                 <p className="text-center">Chưa có sản phẩm nào</p>
               ) : (
-                <div className="h-[500px]">
+                <div className="h-auto w-full">
                   <Slider {...settings}>
                     {products.map((productItem) => (
                       <ShoppingProductTile

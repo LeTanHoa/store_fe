@@ -17,53 +17,6 @@ import { toast } from "react-toastify";
 const { TextArea } = Input;
 
 function ProductDetail() {
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  const { id } = useParams();
-  const dispatch = useDispatch();
-
-  const { user } = useSelector((state) => state.auth);
-  const { cartItems } = useSelector((state) => state.shopCart);
-  const { reviews } = useSelector((state) => state.shopReview);
-  const { productDetails } = useSelector((state) => state.shopProducts);
-  const [rating, setRating] = useState(0);
-  const [reviewMsg, setReviewMsg] = useState("");
-  const [mainImage, setMainImage] = useState("");
-
-  const { productList } = useSelector((state) => state.shopProducts);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -77,6 +30,25 @@ function ProductDetail() {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: isMobile ? 1 : 4,
+    slidesToScroll: isMobile ? 1 : 4,
+  };
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shopCart);
+  const { reviews } = useSelector((state) => state.shopReview);
+  const { productDetails } = useSelector((state) => state.shopProducts);
+  const [rating, setRating] = useState(0);
+  const [reviewMsg, setReviewMsg] = useState("");
+  const [mainImage, setMainImage] = useState("");
+
+  const { productList } = useSelector((state) => state.shopProducts);
 
   useEffect(() => {
     if (id) dispatch(fetchProductDetails(id));

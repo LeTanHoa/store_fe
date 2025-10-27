@@ -1,5 +1,6 @@
 import ProductFilter from "@/components/shopping-view/filter";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
+import ShoppingProductTileListing from "@/components/shopping-view/product-tile-listing";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -165,10 +166,10 @@ function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 py-4">
           {productList && productList.length > 0
             ? productList.map((productItem) => (
-                <ShoppingProductTile
+                <ShoppingProductTileListing
                   key={productItem._id}
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
