@@ -43,6 +43,7 @@ function AdminProducts() {
   const [currentEditedId, setCurrentEditedId] = useState(null);
 
   const { productList } = useSelector((state) => state.adminProducts);
+  console.log(productList);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -136,13 +137,9 @@ function AdminProducts() {
 
           {/* Upload hình ảnh */}
           <ProductImageUpload
-            imageFiles={imageFiles}
-            setImageFiles={setImageFiles}
             uploadedImageUrl={uploadedImageUrl}
             setUploadedImageUrl={setUploadedImageUrl}
             setImageLoadingState={setImageLoadingState}
-            imageLoadingState={imageLoadingState}
-            isEditMode={currentEditedId !== null}
           />
 
           {/* Form sản phẩm */}
