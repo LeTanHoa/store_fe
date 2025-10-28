@@ -24,8 +24,6 @@ function UserCartItemsContent({ cartItem }) {
         );
         const getTotalStock = productList[getCurrentProductIndex].totalStock;
 
-        console.log(getCurrentProductIndex, getTotalStock, "getTotalStock");
-
         if (indexOfCurrentCartItem > -1) {
           const getQuantity = getCartItems[indexOfCurrentCartItem].quantity;
           if (getQuantity + 1 > getTotalStock) {
@@ -72,8 +70,15 @@ function UserCartItemsContent({ cartItem }) {
         alt={cartItem?.title}
         className="w-20 h-20 rounded object-cover"
       />
-      <div className="flex-1">
-        <h3 className="font-extrabold">{cartItem?.title}</h3>
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex items-center justify-between">
+          <h3 className="font-extrabold">{cartItem?.title}</h3>
+          <Trash
+            onClick={() => handleCartItemDelete(cartItem)}
+            className="cursor-pointer mt-1"
+            size={20}
+          />
+        </div>
         <div className="flex items-center gap-2 mt-1">
           <Button
             variant="outline"
@@ -96,20 +101,16 @@ function UserCartItemsContent({ cartItem }) {
             <span className="sr-only">Decrease</span>
           </Button>
         </div>
-      </div>
-      <div className="flex flex-col items-end">
-        <p className="font-semibold">
-          $
-          {(
-            (cartItem?.salePrice > 0 ? cartItem?.salePrice : cartItem?.price) *
-            cartItem?.quantity
-          ).toFixed(2)}
-        </p>
-        <Trash
-          onClick={() => handleCartItemDelete(cartItem)}
-          className="cursor-pointer mt-1"
-          size={20}
-        />
+        <div className="flex flex-col items-start">
+          <p className="font-semibold">
+            $
+            {(
+              (cartItem?.salePrice > 0
+                ? cartItem?.salePrice
+                : cartItem?.price) * cartItem?.quantity
+            ).toFixed(2)}
+          </p>
+        </div>
       </div>
     </div>
   );
