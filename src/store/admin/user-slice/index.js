@@ -9,14 +9,14 @@ const initialState = {
 export const fetchAllUsers = createAsyncThunk(
   "/users/fetchAllUsers",
   async () => {
-    const result = await axios.get("https://storebe-api.vercel.app/api/admin/users/get");
+    const result = await axios.get("http://localhost:8080/api/admin/users/get");
     return result?.data;
   }
 );
 
 export const deleteUser = createAsyncThunk("/users/deleteUser", async (id) => {
   const result = await axios.delete(
-    `https://storebe-api.vercel.app/api/admin/users/delete/${id}`
+    `http://localhost:8080/api/admin/users/delete/${id}`
   );
 
   return result?.data;

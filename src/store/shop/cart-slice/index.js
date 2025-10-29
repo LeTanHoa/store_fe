@@ -10,7 +10,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {
     const response = await axios.post(
-      "https://storebe-api.vercel.app/api/shop/cart/add",
+      "http://localhost:8080/api/shop/cart/add",
       {
         userId,
         productId,
@@ -26,7 +26,7 @@ export const fetchCartItems = createAsyncThunk(
   "cart/fetchCartItems",
   async (userId) => {
     const response = await axios.get(
-      `https://storebe-api.vercel.app/api/shop/cart/get/${userId}`
+      `http://localhost:8080/api/shop/cart/get/${userId}`
     );
 
     return response.data;
@@ -37,7 +37,7 @@ export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
   async ({ userId, productId }) => {
     const response = await axios.delete(
-      `https://storebe-api.vercel.app/api/shop/cart/${userId}/${productId}`
+      `http://localhost:8080/api/shop/cart/${userId}/${productId}`
     );
 
     return response.data;
@@ -48,7 +48,7 @@ export const updateCartQuantity = createAsyncThunk(
   "cart/updateCartQuantity",
   async ({ userId, productId, quantity }) => {
     const response = await axios.put(
-      "https://storebe-api.vercel.app/api/shop/cart/update-cart",
+      "http://localhost:8080/api/shop/cart/update-cart",
       {
         userId,
         productId,

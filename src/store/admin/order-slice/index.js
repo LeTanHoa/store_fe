@@ -10,7 +10,7 @@ export const getAllOrdersForAdmin = createAsyncThunk(
   "/order/getAllOrdersForAdmin",
   async () => {
     const response = await axios.get(
-      `https://storebe-api.vercel.app/api/admin/orders/get`
+      `http://localhost:8080/api/admin/orders/get`
     );
 
     return response.data;
@@ -21,7 +21,7 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
   "/order/getOrderDetailsForAdmin",
   async (id) => {
     const response = await axios.get(
-      `https://storebe-api.vercel.app/api/admin/orders/details/${id}`
+      `http://localhost:8080/api/admin/orders/details/${id}`
     );
 
     return response.data;
@@ -32,7 +32,7 @@ export const updateOrderStatus = createAsyncThunk(
   "/order/updateOrderStatus",
   async ({ id, orderStatus }) => {
     const response = await axios.put(
-      `https://storebe-api.vercel.app/api/admin/orders/update/${id}`,
+      `http://localhost:8080/api/admin/orders/update/${id}`,
       {
         orderStatus,
       }
@@ -46,7 +46,7 @@ export const deleteOrderById = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `https://storebe-api.vercel.app/api/admin/orders/delete/${orderId}`
+        `http://localhost:8080/api/admin/orders/delete/${orderId}`
       );
       return {
         orderId,

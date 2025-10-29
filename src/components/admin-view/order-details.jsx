@@ -34,7 +34,7 @@ function AdminOrderDetailsView({ cancel, orderDetails }) {
 
         try {
           await axios.post(
-            "https://storebe-api.vercel.app/api/email/send-mail-order-status",
+            "http://localhost:8080/api/email/send-mail-order-status",
             {
               idUser: orderDetails?.userId,
               orderStatus: status,

@@ -26,7 +26,7 @@ function AuthRegister() {
 
         try {
           await axios.post(
-            "https://storebe-api.vercel.app/api/email/send-mail-register",
+            "http://localhost:8080/api/email/send-mail-register",
             {
               email: data?.meta?.arg?.email,
               name: data?.meta?.arg?.userName,

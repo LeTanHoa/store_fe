@@ -35,7 +35,7 @@ function PaypalReturnPage() {
             ).unwrap();
             console.log(orderRes);
             await axios.post(
-              "https://storebe-api.vercel.app/api/email/send-mail-order-success",
+              "http://localhost:8080/api/email/send-mail-order-success",
               {
                 email: user?.email,
                 data: orderRes,

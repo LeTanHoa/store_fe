@@ -45,7 +45,7 @@ function AdminDashboard() {
 
   const fetchAllReviews = async () => {
     try {
-      const res = await axios.get("https://storebe-api.vercel.app/api/shop/review/all");
+      const res = await axios.get("http://localhost:8080/api/shop/review/all");
       setAllReviews(res.data.data || []);
     } catch (err) {
       console.error("Lỗi khi tải đánh giá:", err);

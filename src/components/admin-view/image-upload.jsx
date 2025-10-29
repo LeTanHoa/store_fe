@@ -46,7 +46,7 @@ function ProductImageUpload({
       data.append("my_files", file);
 
       const res = await axios.post(
-        "https://storebe-api.vercel.app/api/admin/products/upload-images",
+        "http://localhost:8080/api/admin/products/upload-images",
         data
       );
 
