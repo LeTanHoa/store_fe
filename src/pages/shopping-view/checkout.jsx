@@ -69,7 +69,7 @@ function ShoppingCheckout() {
 
     try {
       const res = await dispatch(createNewOrder(orderData)).unwrap();
-
+      console.log(res);
       // Expect res to be response.data from backend
       if (res?.approvalURL) {
         // PayPal: store orderId locally so we can capture later
@@ -83,6 +83,7 @@ function ShoppingCheckout() {
         const orderRes = await dispatch(
           getOrderDetailsForAdmin(res?.orderId)
         ).unwrap();
+        console.log(orderRes);
         await axios.post(
           "https://storebe-api.vercel.app/api/email/send-mail-order-success",
           {

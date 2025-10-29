@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import ld from "./../../assets/ld2.jpg";
 
 function PaypalReturnPage() {
   const dispatch = useDispatch();
@@ -55,9 +56,17 @@ function PaypalReturnPage() {
 
   return (
     <div className="min-h-screen">
-      <Card>
+      <Card className="p-10 h-screen flex items-center justify-center flex-col">
+        <img
+          src={ld}
+          alt=""
+          className="w-full md:w-[50%] object-contain h-[30%] md:h-[50%]"
+        />
+
         <CardHeader>
-          <CardTitle>Đang xử lý thanh toán...Vui lòng đợi!</CardTitle>
+          <CardTitle className="text-xl md:text-4xl">
+            Đang xử lý thanh toán...Vui lòng đợi!
+          </CardTitle>
         </CardHeader>
       </Card>
     </div>

@@ -88,10 +88,14 @@ function AdminDashboard() {
 
   // 📊 Dữ liệu cho biểu đồ doanh thu theo trạng thái đơn hàng
   const chartData = [
-     {
-      name: "Đang chờ",
+    {
+      name: "Đã xác nhận",
       value:
-        orderList?.filter((o) => o.orderStatus === "pending").length || 0,
+        orderList?.filter((o) => o.orderStatus === "confirmed").length || 0,
+    },
+    {
+      name: "Đang chờ",
+      value: orderList?.filter((o) => o.orderStatus === "pending").length || 0,
     },
     {
       name: "Đang xử lý",
