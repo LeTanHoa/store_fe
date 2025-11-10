@@ -21,7 +21,7 @@ function ProductDetail() {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768); // 768px là breakpoint cho mobile
+      setIsMobile(window.innerWidth <= 768);
     };
 
     checkScreenSize();
@@ -47,7 +47,7 @@ function ProductDetail() {
   const [rating, setRating] = useState(0);
   const [reviewMsg, setReviewMsg] = useState("");
   const [mainImage, setMainImage] = useState("");
-
+  const [selectedCapacity, setSelectedCapacity] = useState("");
   const { productList } = useSelector((state) => state.shopProducts);
 
   useEffect(() => {
@@ -68,9 +68,16 @@ function ProductDetail() {
       : productDetails?.averageReview || 0;
 
   const handleAddToCart = () => {
+    if (!selectedCapacity && productDetails.capacities?.length > 0) {
+      toast.error("Vui lòng chọn dung lượng trước khi thêm vào giỏ hàng!");
+      return;
+    }
+
     const currentItems = cartItems.items || [];
     const existing = currentItems.find(
-      (item) => item.productId === productDetails?._id
+      (item) =>
+        item.productId === productDetails?._id &&
+        item.capacity === selectedCapacity // ✅ kiểm tra theo dung lượng
     );
 
     if (existing && existing.quantity + 1 > productDetails.totalStock) {
@@ -84,6 +91,7 @@ function ProductDetail() {
       addToCart({
         userId: user?.id,
         productId: productDetails._id,
+        capacity: selectedCapacity,
         quantity: 1,
       })
     ).then((res) => {
@@ -155,7 +163,6 @@ function ProductDetail() {
             />
           </div>
 
-          {/* Thumbnails */}
           <div className="flex gap-3 mt-4 justify-center">
             {productDetails?.images?.map((img, i) => (
               <div
@@ -175,18 +182,15 @@ function ProductDetail() {
           </div>
         </div>
 
-        {/* INFO SECTION */}
         <div>
           <h1 className="text-3xl font-bold mb-3">{productDetails?.title}</h1>
           <p className="text-gray-500 mb-4">{productDetails?.description}</p>
-
           <div className="flex items-center mb-4">
             <Rate allowHalf value={averageReview} disabled />
             <span className="ml-2 text-gray-500">
               ({averageReview.toFixed(1)})
             </span>
           </div>
-
           <div className="flex items-baseline gap-3 mb-6">
             <span
               className={`text-3xl font-semibold ${
@@ -202,8 +206,29 @@ function ProductDetail() {
                 ${productDetails?.salePrice}
               </span>
             )}
-          </div>
-
+          </div>{" "}
+          <p className="mb-3 text-gray-600">
+            Dung lượng:{" "}
+            <span className="font-medium">
+              {productDetails?.capacities &&
+              productDetails?.capacities.length > 0
+                ? productDetails.capacities.map((cap, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedCapacity(cap)}
+                      className={`mr-2 px-3 py-1 rounded-xl border transition 
+            ${
+              selectedCapacity === cap
+                ? "bg-blue-500 text-white border-blue-500"
+                : "bg-gray-100 border-gray-300 hover:bg-gray-200"
+            }`}
+                    >
+                      {cap}
+                    </button>
+                  ))
+                : "Không hỗ trợ"}
+            </span>
+          </p>
           <p className="mb-3 text-gray-600">
             Danh mục:{" "}
             <span className="font-medium">{productDetails?.category}</span>
@@ -216,7 +241,6 @@ function ProductDetail() {
             Tồn kho:{" "}
             <span className="font-medium">{productDetails?.totalStock}</span>
           </p>
-
           {productDetails?.totalStock > 0 ? (
             <Button
               type="primary"
@@ -235,7 +259,6 @@ function ProductDetail() {
           )}
         </div>
 
-        {/* REVIEW SECTION */}
         <div className="lg:col-span-2 mt-12">
           <Divider>Đánh giá sản phẩm</Divider>
 
@@ -256,7 +279,6 @@ function ProductDetail() {
             )}
           </div>
 
-          {/* WRITE REVIEW */}
           <div className="mt-10 border-t pt-6">
             <h3 className="text-xl font-semibold mb-3">
               Viết đánh giá của bạn
@@ -298,7 +320,6 @@ function ProductDetail() {
           </Slider>
         </div>
       </div>
-      {/* IMAGE SECTION */}
     </div>
   );
 }

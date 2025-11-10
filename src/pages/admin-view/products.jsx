@@ -31,6 +31,7 @@ const initialFormData = {
   salePrice: "",
   totalStock: "",
   averageReview: 0,
+  capacities: [],
 };
 
 function AdminProducts() {
@@ -221,9 +222,23 @@ function AdminProducts() {
                 />
               </Form.Item>
 
-              <Form.Item label="Giá khuyến mãi" name="salePrice">
+              <Form.Item
+                label="Giá khuyến mãi"
+                name="salePrice"
+                rules={[
+                  {
+                    validator: (_, value) => {
+                      if (value === undefined || value === null || value >= 0) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("Giá khuyến mãi phải là số không âm")
+                      );
+                    },
+                  },
+                ]}
+              >
                 <InputNumber
-                  min={0}
                   className="w-full"
                   placeholder="Nhập giá khuyến mãi (nếu có)"
                 />
@@ -241,6 +256,28 @@ function AdminProducts() {
                   className="w-full"
                   placeholder="Nhập tổng số lượng tồn kho"
                 />
+              </Form.Item>
+              <Form.Item
+                label="Dung lượng"
+                name="capacities"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng chọn ít nhất 1 dung lượng!",
+                  },
+                ]}
+              >
+                <Select
+                  mode="multiple"
+                  placeholder="Chọn dung lượng"
+                  getPopupContainer={(triggerNode) => triggerNode.parentNode}
+                >
+                  <Select.Option value="64GB">64GB</Select.Option>
+                  <Select.Option value="128GB">128GB</Select.Option>
+                  <Select.Option value="256GB">256GB</Select.Option>
+                  <Select.Option value="512GB">512GB</Select.Option>
+                  <Select.Option value="1TB">1TB</Select.Option>
+                </Select>
               </Form.Item>
 
               <Form.Item>

@@ -75,9 +75,11 @@ function ShoppingOrderDetailsView({ orderDetails }) {
                       key={index}
                       className="flex items-center justify-between"
                     >
-                      <span>Tên: {item.title}</span>
-                      <span>Số lượng: {item.quantity}</span>
-                      <span>Giá: ${item.price}</span>
+                      <span>Tên: {item?.title}</span>
+                      <span>Dung lượng: {item?.capacity}</span>
+
+                      <span>Số lượng: {item?.quantity}</span>
+                      <span>Giá: ${item?.price}</span>
                     </li>
                   ))
                 : null}

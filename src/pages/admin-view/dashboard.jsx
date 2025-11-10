@@ -10,7 +10,6 @@ import {
   Avatar,
   Rate,
   Table,
-  Tag,
 } from "antd";
 import {
   ShoppingCartOutlined,
@@ -33,6 +32,8 @@ import { fetchAllProducts } from "@/store/admin/products-slice";
 import { fetchAllUsers } from "@/store/admin/user-slice";
 import axios from "axios";
 import RevenueChart from "./revenuechart";
+import SaleForm from "@/components/admin-view/sale-form";
+import SaleList from "@/components/admin-view/sale-list";
 
 const { Title } = Typography;
 
@@ -297,6 +298,13 @@ function AdminDashboard() {
         </div>
 
         {/* --- 3 sản phẩm được mua gần nhất --- */}
+      </div>
+
+      <div className="mt-8 bg-white p-4 rounded-lg shadow">
+        <Title level={4}>Tạo Sales</Title>
+
+        <SaleForm />
+        <SaleList />
       </div>
 
       {/* --- Đánh giá gần nhất --- */}

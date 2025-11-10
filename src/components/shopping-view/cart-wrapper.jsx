@@ -4,6 +4,7 @@ import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content";
 
 function UserCartWrapper({ cartItems, setOpenCartSheet }) {
+  console.log(cartItems);
   const navigate = useNavigate();
   const totalCartAmount =
     cartItems && cartItems.length > 0

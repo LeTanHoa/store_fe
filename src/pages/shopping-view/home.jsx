@@ -11,6 +11,8 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { getFeatureImages } from "@/store/common-slice";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
 import { toast } from "react-toastify";
+import SaleProducts from "@/components/shopping-view/sale-product";
+import axios from "axios";
 const ShoppingHome = () => {
   const categoriesWithIcon = [
     {
@@ -88,6 +90,14 @@ const ShoppingHome = () => {
   ];
 
   const [isMobile, setIsMobile] = useState(false);
+
+  const [sales, setSales] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/admin/sales")
+      .then((res) => setSales(res.data));
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -214,6 +224,7 @@ const ShoppingHome = () => {
           )}
         </Slider>
       </div>
+
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl uppercase font-bold text-center mb-8">
@@ -259,6 +270,7 @@ const ShoppingHome = () => {
           </div>
         </div>
       </section>
+      <SaleProducts saleData={sales} />
 
       {categories.map(({ id, label }) => {
         const products = productsByCategory[id];

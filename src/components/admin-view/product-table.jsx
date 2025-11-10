@@ -88,6 +88,20 @@ function AdminProductTable({
       render: (totalStock) => <strong>{totalStock}</strong>,
     },
     {
+      title: "Dung lượng",
+      dataIndex: "capacities",
+      key: "capacities",
+      render: (capacities) =>
+        capacities && capacities.length > 0
+          ? capacities.map((cap, idx) => (
+              <span key={idx} className="mr-2 px-2 py-1 bg-gray-100 rounded">
+                {cap}
+              </span>
+            ))
+          : "—",
+    },
+
+    {
       title: "Hành động",
       key: "action",
       render: (_, record) => (

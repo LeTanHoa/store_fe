@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { addFeatureImage, getFeatureImages } from "@/store/common-slice";
 import axios from "axios";
 import { Select, message } from "antd";
+import { toast } from "react-toastify";
 
 function AdminBanners() {
   const [imageFile, setImageFile] = useState(null);
@@ -41,18 +42,18 @@ function AdminBanners() {
     try {
       await dispatch(addFeatureImage({ imageFile, type: bannerType }));
       dispatch(getFeatureImages());
-      message.success("Tải banner thành công!");
+      toast.success("Tải banner thành công!");
       handleRemoveSelectedImage();
       setBannerType("");
     } catch (error) {
-      message.error("Không thể upload ảnh!");
+      console.log(error);
+      toast.error("Không thể upload ảnh!");
     } finally {
       setImageLoading(false);
     }
   };
 
   const handleDeleteFeatureImage = async (id) => {
-    if (!window.confirm("Bạn có chắc chắn muốn xoá ảnh này không?")) return;
     await axios.delete(`http://localhost:8080/api/common/feature/delete/${id}`);
     dispatch(getFeatureImages());
     message.success("Đã xóa banner!");

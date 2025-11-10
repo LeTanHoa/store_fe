@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 
 function ShoppingCheckout() {
   const { cartItems } = useSelector((state) => state.shopCart);
+
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
@@ -54,6 +55,7 @@ function ShoppingCheckout() {
         image: item?.image,
         price: item?.salePrice > 0 ? item?.salePrice : item?.price,
         quantity: item?.quantity,
+        capacity: item?.capacity,
       })),
       addressInfo: {
         addressId: currentSelectedAddress?._id,
@@ -151,7 +153,7 @@ function ShoppingCheckout() {
           <div className="mt-8 space-y-4">
             <div className="flex justify-between">
               <span className="font-bold">Tổng cộng</span>
-              <span className="font-bold">${totalCartAmount.toFixed(2)}</span>
+              <span className="font-bold">${totalCartAmount}</span>
             </div>
           </div>
 

@@ -41,6 +41,7 @@ function UserCartItemsContent({ cartItem }) {
       updateCartQuantity({
         userId: user?.id,
         productId: getCartItem?.productId,
+        capacity: getCartItem?.capacity,
         quantity:
           typeOfAction === "plus"
             ? getCartItem?.quantity + 1
@@ -55,7 +56,11 @@ function UserCartItemsContent({ cartItem }) {
 
   function handleCartItemDelete(getCartItem) {
     dispatch(
-      deleteCartItem({ userId: user?.id, productId: getCartItem?.productId })
+      deleteCartItem({
+        userId: user?.id,
+        productId: getCartItem?.productId,
+        capacity: getCartItem?.capacity,
+      })
     ).then((data) => {
       if (data?.payload?.success) {
         toast.success("Đã xóa sản phẩm khỏi giỏ hàng");
@@ -72,7 +77,9 @@ function UserCartItemsContent({ cartItem }) {
       />
       <div className="flex flex-col gap-2 w-full">
         <div className="flex items-center justify-between">
-          <h3 className="font-extrabold">{cartItem?.title}</h3>
+          <h3 className="font-extrabold">
+            {cartItem?.title} - {cartItem?.capacity}
+          </h3>
           <Trash
             onClick={() => handleCartItemDelete(cartItem)}
             className="cursor-pointer mt-1"
@@ -104,11 +111,8 @@ function UserCartItemsContent({ cartItem }) {
         <div className="flex flex-col items-start">
           <p className="font-semibold">
             $
-            {(
-              (cartItem?.salePrice > 0
-                ? cartItem?.salePrice
-                : cartItem?.price) * cartItem?.quantity
-            ).toFixed(2)}
+            {(cartItem?.salePrice > 0 ? cartItem?.salePrice : cartItem?.price) *
+              cartItem?.quantity}
           </p>
         </div>
       </div>

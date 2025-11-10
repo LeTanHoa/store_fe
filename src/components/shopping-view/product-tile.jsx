@@ -1,12 +1,10 @@
-import { Card, CardContent, CardFooter } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";
 const ShoppingProductTile = ({
   product,
   // handleGetProductDetails,
-  handleAddtoCart,
 }) => {
   const imageUrl =
     product?.images?.[0] ||
@@ -27,11 +25,7 @@ const ShoppingProductTile = ({
           </Badge>
         ) : product?.totalStock < 10 ? (
           <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-            {`Only ${product?.totalStock} items left`}
-          </Badge>
-        ) : product?.salePrice > 0 ? (
-          <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-            Sale
+            {`Chỉ còn ${product?.totalStock} sản phẩm`}
           </Badge>
         ) : null}
       </div>
@@ -66,20 +60,6 @@ const ShoppingProductTile = ({
           ) : null}
         </div>
       </CardContent>
-      <CardFooter>
-        {product?.totalStock === 0 ? (
-          <Button className="w-full opacity-60 cursor-not-allowed">
-            Out Of Stock
-          </Button>
-        ) : (
-          <Button
-            onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
-            className="w-full"
-          >
-            Thêm vào giỏ
-          </Button>
-        )}
-      </CardFooter>
     </Card>
   );
 };
